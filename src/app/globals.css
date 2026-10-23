@@ -1,26 +1,113 @@
 @import "tailwindcss";
 
+/* 設計 tokens：紙張底色、墨色文字、朱紅強調色 */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --paper: #f6f3ec;
+  --surface: #fffdf8;
+  --sunken: #efebe2;
+  --ink: #1a1814;
+  --ink-soft: #3d3933;
+  --muted: #7a7366;
+  --line: #e2dccf;
+  --accent: #e0522b;
+  --accent-ink: #ffffff;
+  --accent-soft: #fbe4da;
+  --sage: #2f5d50;
+  --sage-soft: #dfeae4;
+  --danger: #b4321f;
+  --danger-soft: #fbe3de;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --paper: #14130f;
+    --surface: #1c1a16;
+    --sunken: #23201b;
+    --ink: #f2eee6;
+    --ink-soft: #d6d0c4;
+    --muted: #a0998b;
+    --line: #322e27;
+    --accent: #ff6a40;
+    --accent-ink: #1a0d08;
+    --accent-soft: #3a1f16;
+    --sage: #8cc2ae;
+    --sage-soft: #1e2d27;
+    --danger: #ff8a75;
+    --danger-soft: #3a1c17;
   }
 }
 
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-sage: var(--sage);
+  --color-sage-soft: var(--sage-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+
+  --font-sans: var(--font-noto-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-noto-serif), ui-serif, Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --animate-wave: wave 1.4s ease-in-out infinite;
+  --animate-rise: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+/* 紙張顆粒感 */
+.grain {
+  background-image: radial-gradient(color-mix(in oklab, var(--ink) 7%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
